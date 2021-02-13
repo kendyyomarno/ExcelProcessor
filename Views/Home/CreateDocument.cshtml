@@ -1,0 +1,163 @@
+﻿@model ExcelProcessor.Models.InputModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form asp-action="CreateDocument">
+    <div class="row">
+        <ul>
+            @if (ViewData["ProcessResult"] != null)
+            {
+                foreach (ProcessResult processResult in (List<ProcessResult>)ViewData["ProcessResult"])
+                {
+                    if (processResult.Success)
+                    {
+                        <li class="text-success">
+                            @processResult.Message
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="text-danger">
+                            @processResult.Message
+                        </li>
+
+                    }
+                }
+            }
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-7">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Directory" class="control-label"></label>
+                <input asp-for="Directory" class="form-control" placeholder="default -> E:\temp\tvlk\files\" />
+                <span asp-validation-for="Directory" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SearchString" class="control-label"></label>
+                <input asp-for="SearchString" class="form-control" placeholder="without * e.g Jan 2018" />
+                <span asp-validation-for="SearchString" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MonthDisplay" class="control-label"></label>
+                <input asp-for="MonthDisplay" class="form-control" placeholder="without * e.g Jan 2018" />
+                <span asp-validation-for="MonthDisplay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product" class="control-label"></label>
+                <input asp-for="Product" class="form-control" placeholder="without * e.g Jan 2018" />
+                <span asp-validation-for="Product" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="auditColumns.date" class="control-label"></label>
+                <input asp-for="auditColumns.date" class="form-control" />
+                <span asp-validation-for="auditColumns.date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="auditColumns.bid" class="control-label"></label>
+                <input asp-for="auditColumns.bid" class="form-control" />
+                <span asp-validation-for="auditColumns.bid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="auditColumns.contractEntity" class="control-label"></label>
+                <input asp-for="auditColumns.contractEntity" class="form-control" />
+                <span asp-validation-for="auditColumns.contractEntity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="auditColumns.collectEntity" class="control-label"></label>
+                <input asp-for="auditColumns.collectEntity" class="form-control" />
+                <span asp-validation-for="auditColumns.collectEntity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="auditColumns.contractCurrency" class="control-label"></label>
+                <input asp-for="auditColumns.contractCurrency" class="form-control" />
+                <span asp-validation-for="auditColumns.contractCurrency" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="auditColumns.collectCurrency" class="control-label"></label>
+                <input asp-for="auditColumns.collectCurrency" class="form-control" />
+                <span asp-validation-for="auditColumns.collectCurrency" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="auditColumns.commissionRevenue" class="control-label"></label>
+                <input asp-for="auditColumns.commissionRevenue" class="form-control" />
+                <span asp-validation-for="auditColumns.commissionRevenue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="auditColumns.transactionFee" class="control-label"></label>
+                <input asp-for="auditColumns.transactionFee" class="form-control" />
+                <span asp-validation-for="auditColumns.transactionFee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="auditColumns.premium" class="control-label"></label>
+                <input asp-for="auditColumns.premium" class="form-control" />
+                <span asp-validation-for="auditColumns.premium" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="auditColumns.discount" class="control-label"></label>
+                <input asp-for="auditColumns.discount" class="form-control" />
+                <span asp-validation-for="auditColumns.discount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="auditColumns.coupon" class="control-label"></label>
+                <input asp-for="auditColumns.coupon" class="form-control" />
+                <span asp-validation-for="auditColumns.coupon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="auditColumns.redeemedPoints" class="control-label"></label>
+                <input asp-for="auditColumns.redeemedPoints" class="form-control" />
+                <span asp-validation-for="auditColumns.redeemedPoints" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="auditColumns.uniqueCode" class="control-label"></label>
+                <input asp-for="auditColumns.uniqueCode" class="form-control" />
+                <span asp-validation-for="auditColumns.uniqueCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="auditColumns.installmentFee" class="control-label"></label>
+                <input asp-for="auditColumns.installmentFee" class="form-control" />
+                <span asp-validation-for="auditColumns.installmentFee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="auditColumns.deliveryFee" class="control-label"></label>
+                <input asp-for="auditColumns.deliveryFee" class="form-control" />
+                <span asp-validation-for="auditColumns.deliveryFee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="auditColumns.invoiceAmount" class="control-label"></label>
+                <input asp-for="auditColumns.invoiceAmount" class="form-control" />
+                <span asp-validation-for="auditColumns.invoiceAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="auditColumns.refundFee" class="control-label"></label>
+                <input asp-for="auditColumns.refundFee" class="form-control" />
+                <span asp-validation-for="auditColumns.refundFee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="auditColumns.rescheduleFee" class="control-label"></label>
+                <input asp-for="auditColumns.rescheduleFee" class="form-control" />
+                <span asp-validation-for="auditColumns.rescheduleFee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="auditColumns.rebookCost" class="control-label"></label>
+                <input asp-for="auditColumns.rebookCost" class="form-control" />
+                <span asp-validation-for="auditColumns.rebookCost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProcessFormula" class="control-label"></label>
+                <input asp-for="ProcessFormula" class="form-control" placeholder="=SUM(A0:C0)" />
+                <span asp-validation-for="ProcessFormula" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OutputSuffix" class="control-label"></label>
+                <input asp-for="OutputSuffix" class="form-control" placeholder="- Processed" />
+                <span asp-validation-for="OutputSuffix" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Process" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
